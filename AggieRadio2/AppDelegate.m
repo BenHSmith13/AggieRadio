@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
+#import "PodcastViewController.h"
+#import "ArticleViewController.h"
+#import "EventsViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +21,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    PodcastViewController *PocastController = [[PodcastViewController alloc] init];
+    ArticleViewController *ArticleController = [[ArticleViewController alloc] init];
+    EventsViewController *EventController = [[EventsViewController alloc] init];
+    
+    UITabBarController *TabController = [[UITabBarController alloc] init];
+    TabController.viewControllers = @[PocastController, ArticleController, EventController];
+    
+    //ViewController *startViewController = [[ViewController alloc] init];
+    //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:startViewController];
+    
+    self.window.rootViewController = TabController;
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

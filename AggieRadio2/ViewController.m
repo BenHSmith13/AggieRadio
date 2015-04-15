@@ -10,9 +10,20 @@
 
 @interface ViewController ()
 
+@property (nonatomic, strong) UITabBarController *Tabs;
+
 @end
 
 @implementation ViewController
+
+-(instancetype) init
+{
+    self = [super init];
+    if (self) {
+       
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
