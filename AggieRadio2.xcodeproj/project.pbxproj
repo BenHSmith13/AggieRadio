@@ -17,6 +17,7 @@
 		90A232001ADDCC21006E7F83 /* PodcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A231FF1ADDCC21006E7F83 /* PodcastViewController.m */; };
 		90A232031ADEF3D5006E7F83 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A232021ADEF3D5006E7F83 /* ArticleViewController.m */; };
 		90A232061ADEF433006E7F83 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A232051ADEF433006E7F83 /* EventsViewController.m */; };
+		90A232081ADF09E6006E7F83 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A232071ADF09E6006E7F83 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		90A232021ADEF3D5006E7F83 /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
 		90A232041ADEF433006E7F83 /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
 		90A232051ADEF433006E7F83 /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
+		90A232071ADF09E6006E7F83 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90A232081ADF09E6006E7F83 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +75,7 @@
 		90A231C91ADDC192006E7F83 = {
 			isa = PBXGroup;
 			children = (
+				90A232071ADF09E6006E7F83 /* AVFoundation.framework */,
 				90A231D41ADDC192006E7F83 /* AggieRadio2 */,
 				90A231EE1ADDC192006E7F83 /* AggieRadio2Tests */,
 				90A231D31ADDC192006E7F83 /* Products */,

@@ -12,6 +12,11 @@
 
 @interface PodcastViewController ()
 
+@property (nonatomic, strong) AVAudioPlayer* ARFeed;
+@property (nonatomic, assign) BOOL isFeedPlaying;  //need to make singleton
+@property (nonatomic, strong) AVAudioPlayer *pewPew;
+
+
 @end
 
 @implementation PodcastViewController
@@ -20,10 +25,24 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        //Stuff for tab
+        //Stuff for tab -----------------------------------------------------------------------------
         self.tabBarItem.title = @"Podcasts";
         UIImage *iconHeadPhone = [UIImage imageNamed:@"microphone110.png"];
         self.tabBarItem.image = iconHeadPhone;
+        
+        //Header ------------------------------------------------------------------------------------
+        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 50, 200, 50)];
+        UIImage *radioLogo = [UIImage imageNamed:@"WebBanner"];
+        logoView.image = radioLogo;
+        logoView.contentMode = UIViewContentModeScaleAspectFill;
+        [self.view addSubview:logoView];
+        
+        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 100, 300)];
+        [playButton setTitle:@"Listen Live" forState:UIControlStateNormal];
+        [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:playButton];
+        
+        
         
         self.view.backgroundColor = [UIColor blueColor];
     }
@@ -33,6 +52,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.isFeedPlaying = NO;
+    self.ARFeed = [AVPlayer playerWithURL:[NSURL URLWithString:@"http://streams.tsc.usu.edu:8888/"]];
+    
+}
+
+
+-(void)play:(UIButton*)sender{
+    if (!self.isFeedPlaying) {
+        [self.ARFeed play];
+        self.isFeedPlaying = YES;
+    }
+    else
+    {
+        self.isFeedPlaying = NO;
+        //[self.ARFeed stop];  This is all kinds of Broke
+    }
 }
 
 - (void)didReceiveMemoryWarning {
