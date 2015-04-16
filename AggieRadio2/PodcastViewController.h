@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+#import "IsPlayingSingle.h"
+
 @interface PodcastViewController : UIViewController
 
 @end

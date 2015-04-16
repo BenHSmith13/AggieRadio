@@ -13,9 +13,7 @@
 @interface PodcastViewController ()
 
 @property (nonatomic, strong) AVAudioPlayer* ARFeed;
-@property (nonatomic, assign) BOOL isFeedPlaying;  //need to make singleton
-@property (nonatomic, strong) AVAudioPlayer *pewPew;
-
+//@property (nonatomic, assign) BOOL isFeedPlaying;  //need to make singleton
 
 @end
 
@@ -52,21 +50,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.isFeedPlaying = NO;
     self.ARFeed = [AVPlayer playerWithURL:[NSURL URLWithString:@"http://streams.tsc.usu.edu:8888/"]];
     
 }
 
 
 -(void)play:(UIButton*)sender{
-    if (!self.isFeedPlaying) {
+    if (![IsPlayingSingle sharedInstance].isPlaying) {
         [self.ARFeed play];
-        self.isFeedPlaying = YES;
+        [IsPlayingSingle sharedInstance].isPlaying = YES;
     }
     else
     {
-        self.isFeedPlaying = NO;
-        //[self.ARFeed stop];  This is all kinds of Broke
+        [IsPlayingSingle sharedInstance].isPlaying = NO;
+        [self.ARFeed pause];  //This needs to be stop, pause pauses it.
     }
 }
 
