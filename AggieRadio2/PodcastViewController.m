@@ -12,9 +12,6 @@
 
 @interface PodcastViewController ()
 
-@property (nonatomic, strong) AVAudioPlayer* ARFeed;
-//@property (nonatomic, assign) BOOL isFeedPlaying;  //need to make singleton
-
 @end
 
 @implementation PodcastViewController
@@ -29,17 +26,16 @@
         self.tabBarItem.image = iconHeadPhone;
         
         //Header ------------------------------------------------------------------------------------
-        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 50, 200, 50)];
+        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 50, 200, 50)];
         UIImage *radioLogo = [UIImage imageNamed:@"WebBanner"];
         logoView.image = radioLogo;
         logoView.contentMode = UIViewContentModeScaleAspectFill;
         [self.view addSubview:logoView];
         
-        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 100, 300)];
+        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-50, 100, 100, 100)];
         [playButton setTitle:@"Listen Live" forState:UIControlStateNormal];
         [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:playButton];
-        
         
         
         self.view.backgroundColor = [UIColor blueColor];
@@ -50,20 +46,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.ARFeed = [AVPlayer playerWithURL:[NSURL URLWithString:@"http://streams.tsc.usu.edu:8888/"]];
-    
 }
 
 
 -(void)play:(UIButton*)sender{
     if (![IsPlayingSingle sharedInstance].isPlaying) {
-        [self.ARFeed play];
+        [[IsPlayingSingle sharedInstance].ARFeed play];
         [IsPlayingSingle sharedInstance].isPlaying = YES;
     }
     else
     {
         [IsPlayingSingle sharedInstance].isPlaying = NO;
-        [self.ARFeed pause];  //This needs to be stop, pause pauses it.
+        [[IsPlayingSingle sharedInstance].ARFeed pause];  //This needs to be stop, pause pauses it.
     }
 }
 

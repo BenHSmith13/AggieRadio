@@ -20,11 +20,22 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        //Stuff for tab
+        //Stuff for tab ---------------------------------------------------------------------------
         self.tabBarItem.title = @"Articles";
         UIImage *iconNewspaper = [UIImage imageNamed:@"newspaper20.png"];
         self.tabBarItem.image = iconNewspaper;
         
+        //Header ------------------------------------------------------------------------------------
+        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 50, 200, 50)];
+        UIImage *radioLogo = [UIImage imageNamed:@"WebBanner"];
+        logoView.image = radioLogo;
+        logoView.contentMode = UIViewContentModeScaleAspectFill;
+        [self.view addSubview:logoView];
+        
+        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-50, 100, 100, 100)];
+        [playButton setTitle:@"Listen Live" forState:UIControlStateNormal];
+        [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:playButton];
         
         
         self.view.backgroundColor = [UIColor magentaColor];
@@ -35,6 +46,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+-(void)play:(UIButton*)sender{
+    if (![IsPlayingSingle sharedInstance].isPlaying) {
+        [[IsPlayingSingle sharedInstance].ARFeed play];
+        [IsPlayingSingle sharedInstance].isPlaying = YES;
+    }
+    else
+    {
+        [IsPlayingSingle sharedInstance].isPlaying = NO;
+        [[IsPlayingSingle sharedInstance].ARFeed pause];  //This needs to be stop, pause pauses it.
+    }
 }
 
 - (void)didReceiveMemoryWarning {

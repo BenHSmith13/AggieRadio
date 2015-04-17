@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IsPlayingSingle.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface ArticleViewController : UIViewController
 

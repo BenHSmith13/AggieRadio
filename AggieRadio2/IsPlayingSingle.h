@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface IsPlayingSingle : NSObject
 
 +(IsPlayingSingle*)sharedInstance;
 //+(BOOL)getPlaying;
 
+
 @property(nonatomic, assign) BOOL isPlaying;
+@property(nonatomic, strong) AVAudioPlayer* ARFeed;
 
 @end

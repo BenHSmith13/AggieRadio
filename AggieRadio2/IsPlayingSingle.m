@@ -10,6 +10,7 @@
 
 @implementation IsPlayingSingle
 
+
 +(IsPlayingSingle*)sharedInstance
 {
     static IsPlayingSingle *instance = nil;
@@ -18,6 +19,8 @@
         instance = [[self alloc] init];
         
         instance.isPlaying = NO;
+        instance.ARFeed = [AVPlayer playerWithURL:[NSURL URLWithString:@"http://streams.tsc.usu.edu:8888/"]];
+        
     });
     return instance;
 }
