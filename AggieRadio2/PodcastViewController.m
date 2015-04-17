@@ -7,17 +7,22 @@
 //
 //<div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
 //
+//I am using MWFeedParser  https://github.com/mwaterfall/MWFeedParser
+//
 
 #import "PodcastViewController.h"
+#import "MWFeedParser.h"
+#import "NSString+HTML.h"
 
-@interface PodcastViewController ()
+@interface PodcastViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView* podcastTableView;
-@property (nonatomic, strong) NSArray *podcasts;
 
 @end
 
 @implementation PodcastViewController
+
+@synthesize itemsToDisplay;
 
 -(instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,9 +53,11 @@
         [self.view addSubview:podcastTableLabel];
         
         self.podcastTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 250, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
-        
+        self.podcastTableView.delegate = self;
+        self.podcastTableView.dataSource = self;
         [self.view addSubview:self.podcastTableView];
         
+
         
         self.view.backgroundColor = [UIColor blueColor];
     }
@@ -60,8 +67,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Setup for MWFeed Parser ---------------------------------------------------------------------
+    self.title = @"Loading...";
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    parsedItems = [[NSMutableArray alloc] init];
+    self.itemsToDisplay = [NSArray array];
+   
+    //RSS Feed --------------------------------------------------------------------------------------
+    NSURL *podbeanRSSFeed = [NSURL URLWithString:@"http://aggieradio.podbean.com/feed/"];
+    feedParser = [[MWFeedParser alloc] initWithFeedURL:podbeanRSSFeed];
+    feedParser.delegate = self;
+    feedParser.feedParseType = ParseTypeFull;
+    feedParser.connectionType = ConnectionTypeAsynchronously;
+    [feedParser parse];
+    
 }
-
 
 -(void)play:(UIButton*)sender{
     if (![IsPlayingSingle sharedInstance].isPlaying) {
@@ -75,9 +98,98 @@
     }
 }
 
+- (void)updateTableWithParsedItems {
+    self.itemsToDisplay = [parsedItems sortedArrayUsingDescriptors:
+                           [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"date"
+                                                                                ascending:NO]]];
+    self.podcastTableView.userInteractionEnabled = YES;
+    self.podcastTableView.alpha = 1;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{  //I don't know if this is neccisary
+        [self.podcastTableView reloadData];
+    });
+    //[self.podcastTableView reloadData];
+}
+
+#pragma mark -
+#pragma mark MWFeedParserDelegate
+
+- (void)feedParserDidStart:(MWFeedParser *)parser {
+    NSLog(@"Started Parsing: %@", parser.url);
+}
+
+- (void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info {
+    NSLog(@"Parsed Feed Info: “%@”", info.title);
+    self.title = info.title;
+}
+
+- (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
+    NSLog(@"Parsed Feed Item: “%@”", item.title);
+    if (item) [parsedItems addObject:item];
+}
+
+- (void)feedParserDidFinish:(MWFeedParser *)parser {
+    NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
+    [self updateTableWithParsedItems];
+}
+
+- (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
+    NSLog(@"Finished Parsing With Error: %@", error);
+    if (parsedItems.count == 0) {
+        self.title = @"Failed"; // Show failed message in title
+    } else {
+        // Failed but some items parsed, so show and inform of error
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Parsing Incomplete"
+                                                        message:@"There was an error during the parsing of this feed. Not all of the feed items could parsed."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Dismiss"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    [self updateTableWithParsedItems];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -
+#pragma mark Table view data source
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return itemsToDisplay.count;
+}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    // Configure the cell.
+    MWFeedItem *item = [itemsToDisplay objectAtIndex:indexPath.row];
+    if (item) {
+        
+        // Process
+        NSString *itemTitle = item.title ? [item.title stringByConvertingHTMLToPlainText] : @"[No Title]";
+        NSString *itemSummary = item.summary ? [item.summary stringByConvertingHTMLToPlainText] : @"";
+        
+        // Set
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
+        cell.textLabel.text = itemTitle;
+        NSMutableString *subtitle = [NSMutableString string];
+        if (item.date) [subtitle appendFormat:@"%@: ", [formatter stringFromDate:item.date]];
+        [subtitle appendString:itemSummary];
+        cell.detailTextLabel.text = subtitle;
+        
+    }
+    return cell;
 }
 
 /*

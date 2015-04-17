@@ -10,7 +10,20 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "IsPlayingSingle.h"
+#import "MWFeedParser.h"
 
-@interface PodcastViewController : UIViewController
+@interface PodcastViewController : UIViewController <MWFeedParserDelegate> {
+    
+    // Parsing
+    MWFeedParser *feedParser;
+    NSMutableArray *parsedItems;
+    
+    // Displaying
+    NSArray *itemsToDisplay;
+    NSDateFormatter *formatter;
+    
+}
+
+@property (nonatomic, strong) NSArray *itemsToDisplay;
 
 @end
