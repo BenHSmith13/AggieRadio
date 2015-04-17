@@ -12,6 +12,9 @@
 
 @interface PodcastViewController ()
 
+@property (nonatomic, strong) UITableView* podcastTableView;
+@property (nonatomic, strong) NSArray *podcasts;
+
 @end
 
 @implementation PodcastViewController
@@ -36,6 +39,17 @@
         [playButton setTitle:@"Listen Live" forState:UIControlStateNormal];
         [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:playButton];
+        
+        //Table -----------------------------------------------------------------------------------------
+        UILabel *podcastTableLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 50)];
+        podcastTableLabel.text = @"Podcasts";
+        podcastTableLabel.backgroundColor = [UIColor grayColor];
+        podcastTableLabel.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:podcastTableLabel];
+        
+        self.podcastTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 250, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
+        
+        [self.view addSubview:self.podcastTableView];
         
         
         self.view.backgroundColor = [UIColor blueColor];

@@ -37,6 +37,10 @@
         [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:playButton];
         
+        //Table -----------------------------------------------------------------------------------------
+        UITableView *eventTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
+        [self.view addSubview:eventTable];
+        
         
         self.view.backgroundColor = [UIColor greenColor];
     }
