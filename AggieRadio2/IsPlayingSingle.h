@@ -13,7 +13,7 @@
 @interface IsPlayingSingle : NSObject
 
 +(IsPlayingSingle*)sharedInstance;
-//+(BOOL)getPlaying;
+-(void) startFeed;
 
 
 @property(nonatomic, assign) BOOL isPlaying;

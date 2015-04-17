@@ -21,9 +21,14 @@
         instance.isPlaying = NO;
         instance.ARFeed = [AVPlayer playerWithURL:[NSURL URLWithString:@"http://streams.tsc.usu.edu:8888/"]];
         
+        
     });
     return instance;
 }
 
+-(void) startFeed
+{
+    self.ARFeed = [AVPlayer playerWithURL:[NSURL URLWithString:@"http://streams.tsc.usu.edu:8888/"]];
+}
 
 @end

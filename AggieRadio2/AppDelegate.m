@@ -24,12 +24,15 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    PodcastViewController *PocastController = [[PodcastViewController alloc] init];
+    PodcastViewController *PodcastController = [[PodcastViewController alloc] init];
     ArticleViewController *ArticleController = [[ArticleViewController alloc] init];
     EventsViewController *EventController = [[EventsViewController alloc] init];
     
     UITabBarController *TabController = [[UITabBarController alloc] init];
-    TabController.viewControllers = @[PocastController, ArticleController, EventController];
+    TabController.viewControllers = @[
+                                      [[UINavigationController alloc] initWithRootViewController:PodcastController],
+                                      [[UINavigationController alloc] initWithRootViewController:ArticleController],
+                                      [[UINavigationController alloc] initWithRootViewController:EventController]];
     
     //ViewController *startViewController = [[ViewController alloc] init];
     //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:startViewController];

@@ -13,10 +13,12 @@
 #import "PodcastViewController.h"
 #import "MWFeedParser.h"
 #import "NSString+HTML.h"
+#import "SinglePodcastViewController.h"
 
 @interface PodcastViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView* podcastTableView;
+@property (nonatomic, strong) UILabel* PodcastTableLabel;
 
 @end
 
@@ -28,6 +30,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.navigationController.navigationBarHidden = YES;
+        
         //Stuff for tab -----------------------------------------------------------------------------
         self.tabBarItem.title = @"Podcasts";
         UIImage *iconHeadPhone = [UIImage imageNamed:@"microphone110.png"];
@@ -46,11 +50,11 @@
         [self.view addSubview:playButton];
         
         //Table -----------------------------------------------------------------------------------------
-        UILabel *podcastTableLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 50)];
-        podcastTableLabel.text = @"Podcasts";
-        podcastTableLabel.backgroundColor = [UIColor grayColor];
-        podcastTableLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:podcastTableLabel];
+        self.PodcastTableLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 50)];
+        self.PodcastTableLabel.text = @"Podcasts";
+        self.PodcastTableLabel.backgroundColor = [UIColor grayColor];
+        self.PodcastTableLabel.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:self.PodcastTableLabel];
         
         self.podcastTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 250, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
         self.podcastTableView.delegate = self;
@@ -69,7 +73,7 @@
     // Do any additional setup after loading the view.
     
     // Setup for MWFeed Parser ---------------------------------------------------------------------
-    self.title = @"Loading...";
+     self.PodcastTableLabel.text= @"Loading...";
     formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterShortStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
@@ -88,6 +92,7 @@
 
 -(void)play:(UIButton*)sender{
     if (![IsPlayingSingle sharedInstance].isPlaying) {
+        [[IsPlayingSingle sharedInstance] startFeed];
         [[IsPlayingSingle sharedInstance].ARFeed play];
         [IsPlayingSingle sharedInstance].isPlaying = YES;
     }
@@ -108,7 +113,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{  //I don't know if this is neccisary
         [self.podcastTableView reloadData];
     });
-    //[self.podcastTableView reloadData];
 }
 
 #pragma mark -
@@ -192,6 +196,12 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    SinglePodcastViewController *singlePod = [[SinglePodcastViewController alloc] initWithNothing];
+    singlePod.item = (MWFeedItem *)[itemsToDisplay objectAtIndex:indexPath.row];
+
+    [self.navigationController pushViewController:singlePod animated:YES];
+}
 /*
 #pragma mark - Navigation
 

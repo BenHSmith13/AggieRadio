@@ -54,6 +54,7 @@
 
 -(void)play:(UIButton*)sender{
     if (![IsPlayingSingle sharedInstance].isPlaying) {
+        [[IsPlayingSingle sharedInstance] startFeed];
         [[IsPlayingSingle sharedInstance].ARFeed play];
         [IsPlayingSingle sharedInstance].isPlaying = YES;
     }

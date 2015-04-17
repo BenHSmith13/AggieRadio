@@ -26,6 +26,7 @@
 		90F6408A1AE159770023CE6E /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F640861AE159770023CE6E /* NSString+HTML.m */; };
 		90F6408B1AE159770023CE6E /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F640881AE159770023CE6E /* NSString+XMLEntities.m */; };
 		90F6408D1AE159BE0023CE6E /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F6408C1AE159BE0023CE6E /* GTMNSString+HTML.m */; };
+		90F640941AE168880023CE6E /* SinglePodcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90F640931AE168880023CE6E /* SinglePodcastViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		90F640881AE159770023CE6E /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
 		90F6408C1AE159BE0023CE6E /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		90F6408E1AE159C70023CE6E /* GTMNSString+HTML.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		90F640921AE168880023CE6E /* SinglePodcastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinglePodcastViewController.h; sourceTree = "<group>"; };
+		90F640931AE168880023CE6E /* SinglePodcastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglePodcastViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,15 +129,8 @@
 				90A231DF1ADDC192006E7F83 /* Main.storyboard */,
 				90A231E21ADDC192006E7F83 /* Images.xcassets */,
 				90A231E41ADDC192006E7F83 /* LaunchScreen.xib */,
+				90F640901AE168280023CE6E /* Tabs */,
 				90A231D51ADDC192006E7F83 /* Supporting Files */,
-				907FC5ED1AE05B4B00AE12E0 /* IsPlayingSingle.h */,
-				907FC5EE1AE05B4B00AE12E0 /* IsPlayingSingle.m */,
-				90A231FE1ADDCC21006E7F83 /* PodcastViewController.h */,
-				90A231FF1ADDCC21006E7F83 /* PodcastViewController.m */,
-				90A232011ADEF3D5006E7F83 /* ArticleViewController.h */,
-				90A232021ADEF3D5006E7F83 /* ArticleViewController.m */,
-				90A232041ADEF433006E7F83 /* EventsViewController.h */,
-				90A232051ADEF433006E7F83 /* EventsViewController.m */,
 				90F640781AE152C00023CE6E /* MWFeedParser */,
 			);
 			path = AggieRadio2;
@@ -194,6 +190,31 @@
 				90F640881AE159770023CE6E /* NSString+XMLEntities.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		90F640901AE168280023CE6E /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				907FC5ED1AE05B4B00AE12E0 /* IsPlayingSingle.h */,
+				907FC5EE1AE05B4B00AE12E0 /* IsPlayingSingle.m */,
+				90F640911AE168490023CE6E /* Podcasts */,
+				90A232011ADEF3D5006E7F83 /* ArticleViewController.h */,
+				90A232021ADEF3D5006E7F83 /* ArticleViewController.m */,
+				90A232041ADEF433006E7F83 /* EventsViewController.h */,
+				90A232051ADEF433006E7F83 /* EventsViewController.m */,
+			);
+			name = Tabs;
+			sourceTree = "<group>";
+		};
+		90F640911AE168490023CE6E /* Podcasts */ = {
+			isa = PBXGroup;
+			children = (
+				90A231FE1ADDCC21006E7F83 /* PodcastViewController.h */,
+				90A231FF1ADDCC21006E7F83 /* PodcastViewController.m */,
+				90F640921AE168880023CE6E /* SinglePodcastViewController.h */,
+				90F640931AE168880023CE6E /* SinglePodcastViewController.m */,
+			);
+			name = Podcasts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,6 +321,7 @@
 				90A232061ADEF433006E7F83 /* EventsViewController.m in Sources */,
 				90F640821AE152DE0023CE6E /* MWFeedItem.m in Sources */,
 				90F640811AE152DE0023CE6E /* MWFeedInfo.m in Sources */,
+				90F640941AE168880023CE6E /* SinglePodcastViewController.m in Sources */,
 				90A231DE1ADDC192006E7F83 /* ViewController.m in Sources */,
 				90A231DB1ADDC192006E7F83 /* AppDelegate.m in Sources */,
 				90A231D81ADDC192006E7F83 /* main.m in Sources */,
