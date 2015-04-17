@@ -33,6 +33,7 @@
                                       [[UINavigationController alloc] initWithRootViewController:PodcastController],
                                       [[UINavigationController alloc] initWithRootViewController:ArticleController],
                                       [[UINavigationController alloc] initWithRootViewController:EventController]];
+
     
     //ViewController *startViewController = [[ViewController alloc] init];
     //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:startViewController];
