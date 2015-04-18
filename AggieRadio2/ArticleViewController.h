@@ -9,7 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "IsPlayingSingle.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MWFeedParser.h"
 
-@interface ArticleViewController : UIViewController
+@interface ArticleViewController : UIViewController <MWFeedParserDelegate>{
+    // Parsing
+    MWFeedParser *feedParser;
+    NSMutableArray *parsedItems;
+    
+    // Displaying
+    NSArray *itemsToDisplay;
+    NSDateFormatter *formatter;
+}
+
+@property(nonatomic, strong)NSArray *itemsToDisplay;
 
 @end

@@ -38,7 +38,13 @@
         [self.view addSubview:playButton];
         
         //Table -----------------------------------------------------------------------------------------
-        UITableView *eventTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
+        UIImageView *tableHeaderImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 50)];
+        UIImage *tableHeaderImg = [UIImage imageNamed:@"events"];
+        tableHeaderImgView.image = tableHeaderImg;
+        tableHeaderImgView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.view addSubview:tableHeaderImgView];
+        
+        UITableView *eventTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 250, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
         [self.view addSubview:eventTable];
         
         

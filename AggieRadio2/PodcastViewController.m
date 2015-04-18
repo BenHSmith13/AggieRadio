@@ -18,7 +18,6 @@
 @interface PodcastViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView* podcastTableView;
-@property (nonatomic, strong) UILabel* PodcastTableLabel;
 
 @end
 
@@ -30,7 +29,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.navigationController.navigationBarHidden = YES;
+        //self.navigationController.navigationBarHidden = YES;
         
         //Stuff for tab -----------------------------------------------------------------------------
         self.tabBarItem.title = @"Podcasts";
@@ -50,11 +49,11 @@
         [self.view addSubview:playButton];
         
         //Table -----------------------------------------------------------------------------------------
-        self.PodcastTableLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 50)];
-        self.PodcastTableLabel.text = @"Podcasts";
-        self.PodcastTableLabel.backgroundColor = [UIColor grayColor];
-        self.PodcastTableLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:self.PodcastTableLabel];
+        UIImageView *tableHeaderImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 50)];
+        UIImage *tableHeaderImg = [UIImage imageNamed:@"podcasts"];
+        tableHeaderImgView.image = tableHeaderImg;
+        tableHeaderImgView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.view addSubview:tableHeaderImgView];
         
         self.podcastTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 250, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
         self.podcastTableView.delegate = self;
@@ -73,7 +72,7 @@
     // Do any additional setup after loading the view.
     
     // Setup for MWFeed Parser ---------------------------------------------------------------------
-     self.PodcastTableLabel.text= @"Loading...";
+     //self.PodcastTableLabel.text= @"Loading...";
     formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterShortStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
