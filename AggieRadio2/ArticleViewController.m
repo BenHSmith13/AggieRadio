@@ -33,15 +33,16 @@
         self.tabBarItem.image = iconNewspaper;
         
         //Header ------------------------------------------------------------------------------------
-        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 50, 200, 50)];
+        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 75, 200, 50)];
         UIImage *radioLogo = [UIImage imageNamed:@"WebBanner"];
         logoView.image = radioLogo;
         logoView.contentMode = UIViewContentModeScaleAspectFill;
         [self.view addSubview:logoView];
         
-        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-50, 100, 100, 100)];
+        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-50, 115, 100, 100)];
         [playButton setTitle:@"Listen Live" forState:UIControlStateNormal];
         [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
+        [playButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self.view addSubview:playButton];
         
         //Table -----------------------------------------------------------------------------------------
@@ -57,7 +58,7 @@
         [self.view addSubview:self.articleTableView];
         
         
-        self.view.backgroundColor = [UIColor magentaColor];
+        self.view.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }

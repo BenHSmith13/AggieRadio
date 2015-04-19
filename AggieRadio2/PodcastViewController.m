@@ -36,16 +36,21 @@
         UIImage *iconHeadPhone = [UIImage imageNamed:@"microphone110.png"];
         self.tabBarItem.image = iconHeadPhone;
         
+//        self.title = @"Back";  //This makes the title dissapear off the fatty bar at the top, but not the bar itself.
+//        self.navigationItem.titleView = [[UIView alloc] init];
+//        //[self.navigationController setNavigationBarHidden:YES];  This doen't do crap
+        
         //Header ------------------------------------------------------------------------------------
-        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 50, 200, 50)];
+        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 75, 200, 50)];
         UIImage *radioLogo = [UIImage imageNamed:@"WebBanner"];
         logoView.image = radioLogo;
         logoView.contentMode = UIViewContentModeScaleAspectFill;
         [self.view addSubview:logoView];
         
-        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-50, 100, 100, 100)];
+        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-50, 115, 100, 100)];
         [playButton setTitle:@"Listen Live" forState:UIControlStateNormal];
         [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
+        [playButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self.view addSubview:playButton];
         
         //Table -----------------------------------------------------------------------------------------
@@ -62,7 +67,7 @@
         
 
         
-        self.view.backgroundColor = [UIColor blueColor];
+        self.view.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }

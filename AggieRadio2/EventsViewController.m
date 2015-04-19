@@ -10,9 +10,11 @@
 
 #import "EventsViewController.h"
 
-@interface EventsViewController ()
+@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong)NSDictionary* json;
+@property (nonatomic, strong)NSArray* events;
+@property (nonatomic, strong)UITableView* eventTableView;
 
 @end
 
@@ -27,16 +29,19 @@
         UIImage *iconCalendar = [UIImage imageNamed:@"day7.png"];
         self.tabBarItem.image = iconCalendar;
         
+        self.title = @"Aggie Radio";
+        
         //Header ------------------------------------------------------------------------------------
-        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 50, 200, 50)];
+        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 75, 200, 50)];
         UIImage *radioLogo = [UIImage imageNamed:@"WebBanner"];
         logoView.image = radioLogo;
         logoView.contentMode = UIViewContentModeScaleAspectFill;
         [self.view addSubview:logoView];
         
-        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-50, 100, 100, 100)];
+        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-50, 115, 100, 100)];
         [playButton setTitle:@"Listen Live" forState:UIControlStateNormal];
         [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
+        [playButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self.view addSubview:playButton];
         
         //Table -----------------------------------------------------------------------------------------
@@ -46,23 +51,23 @@
         tableHeaderImgView.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:tableHeaderImgView];
         
-        UITableView *eventTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 250, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
-        [self.view addSubview:eventTable];
+        self.eventTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 250, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
+        self.eventTableView.delegate = self;
+        self.eventTableView.dataSource = self;
+        [self.view addSubview:self.eventTableView];
         
-        //JSON Junk --------------------------------------------------------------------------------------
-        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://calendarapi.spingo.com/v1/events?auth_token=8c50d4747a3766dc6ef343474263f19162e711a78ba5a550b969c1b665f04e4f"]];
+        //JSON Junk ---------------------------------------------------------------------------------------
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:@"http://calendarapi.spingo.com/v1/events?auth_token=8c50d4747a3766dc6ef343474263f19162e711a78ba5a550b969c1b665f04e4f"]
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                    
+                                                    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    [self parseJSON:json];
+                                                    NSLog(@"JSON: %@", json);
+                                                }];
+        [dataTask resume];
         
-        //__block NSDictionary *json;
-        [NSURLConnection sendAsynchronousRequest:request
-                                           queue:[NSOperationQueue mainQueue]
-                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                                   self.json = [NSJSONSerialization JSONObjectWithData:data
-                                                                          options:0
-                                                                            error:nil];
-                                   NSLog(@"Async JSON: %@", self.json);
-                               }];
-        
-        self.view.backgroundColor = [UIColor greenColor];
+        self.view.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -87,7 +92,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.json.count;
+    return self.events.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -101,9 +106,15 @@
     }
     
     //configure the cell
-    //
-    
-    
+    EventObject* object = [self.events objectAtIndex:indexPath.row];
+    if(object){
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
+        cell.textLabel.text = object.title;
+        NSMutableString* subtitle = [NSMutableString string];
+        [subtitle appendString:object.date];
+        //[subtitle appendString:object.time];
+        cell.detailTextLabel.text = subtitle;
+    }
     return cell;
 }
 
@@ -112,8 +123,17 @@
     
     NSMutableArray *eventData = [NSMutableArray new];
     for (NSDictionary *individualEvent in events) {
-        //make an object
+        EventObject* thisEvent = [EventObject new];
+        [thisEvent setTitle:[individualEvent objectForKey:@"title"]];
+        [thisEvent setDate:[individualEvent objectForKey:@"date"]];
+        [thisEvent setTime:[individualEvent objectForKey:@"time"]];
+        [eventData addObject:thisEvent];
     }
+    self.events = eventData;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.eventTableView reloadData];
+    });
 }
 
 - (void)didReceiveMemoryWarning {
