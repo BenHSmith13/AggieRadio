@@ -29,10 +29,23 @@
     self.navigationController.navigationBarHidden = NO;
     
     self.title = self.item.title;
+
+    UILabel *articleTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 75, self.view.bounds.size.width, 50)];
+    articleTitle.textAlignment = NSTextAlignmentCenter;
+    articleTitle.text = self.item.title;
+    articleTitle.numberOfLines = 0;
+    articleTitle.lineBreakMode = NSLineBreakByWordWrapping;
+    [articleTitle setFont:[UIFont fontWithName:@"Helvetica-Bold" size:17]]; //Eventually this shoud be changed to get the system font  http://stackoverflow.com/questions/18862868/setting-bold-font-on-ios-uilabel
+    [self.view addSubview:articleTitle];
     
-    UITextView* content = [[UITextView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
-    content.text = item.content;
-    [self.view addSubview:content];
+    UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 115, self.view.bounds.size.width, 50)];
+    authorLabel.textAlignment = NSTextAlignmentCenter;
+    authorLabel.text = self.item.author;
+    [self.view addSubview:authorLabel];
+    
+    UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 165, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
+    [webView loadHTMLString:self.item.content baseURL:nil];
+    [self.view addSubview:webView];
 }
 
 - (void)viewDidLoad {

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "IsPlayingSingle.h"
 #import <AVFoundation/AVFoundation.h>
+#import "CJSONDeserializer.h"
+#include "NSDictionary_JSONExtensions.h"
 
 @interface EventsViewController : UIViewController
 

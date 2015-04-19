@@ -12,6 +12,8 @@
 
 @interface EventsViewController ()
 
+@property (nonatomic, strong)NSDictionary* json;
+
 @end
 
 @implementation EventsViewController
@@ -47,6 +49,18 @@
         UITableView *eventTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 250, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
         [self.view addSubview:eventTable];
         
+        //JSON Junk --------------------------------------------------------------------------------------
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://calendarapi.spingo.com/v1/events?auth_token=8c50d4747a3766dc6ef343474263f19162e711a78ba5a550b969c1b665f04e4f"]];
+        
+        //__block NSDictionary *json;
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                                   self.json = [NSJSONSerialization JSONObjectWithData:data
+                                                                          options:0
+                                                                            error:nil];
+                                   NSLog(@"Async JSON: %@", self.json);
+                               }];
         
         self.view.backgroundColor = [UIColor greenColor];
     }
@@ -70,6 +84,26 @@
         [IsPlayingSingle sharedInstance].isPlaying = NO;
         [[IsPlayingSingle sharedInstance].ARFeed pause];  //This needs to be stop, pause pauses it.
     }
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.json.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
+    //NSArray *item = [self.json object]  THIS IS WHERE I AM AT
+    
+    
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning {
