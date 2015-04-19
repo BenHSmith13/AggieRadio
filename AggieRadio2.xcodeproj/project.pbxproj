@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		90434D851AE2CA3B0068DD3F /* SingleArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90434D841AE2CA3B0068DD3F /* SingleArticleViewController.m */; };
-		90434D8E1AE2E1420068DD3F /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 90434D881AE2E1420068DD3F /* CJSONDeserializer.m */; };
-		90434D8F1AE2E1420068DD3F /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 90434D8A1AE2E1420068DD3F /* CJSONSerializer.m */; };
-		90434D901AE2E1420068DD3F /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 90434D8D1AE2E1420068DD3F /* NSDictionary_JSONExtensions.m */; };
+		90434D931AE445710068DD3F /* EventObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 90434D921AE445710068DD3F /* EventObject.m */; };
 		907FC5EF1AE05B4B00AE12E0 /* IsPlayingSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 907FC5EE1AE05B4B00AE12E0 /* IsPlayingSingle.m */; };
 		90A231D81ADDC192006E7F83 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A231D71ADDC192006E7F83 /* main.m */; };
 		90A231DB1ADDC192006E7F83 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A231DA1ADDC192006E7F83 /* AppDelegate.m */; };
@@ -46,13 +44,8 @@
 /* Begin PBXFileReference section */
 		90434D831AE2CA3B0068DD3F /* SingleArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleArticleViewController.h; sourceTree = "<group>"; };
 		90434D841AE2CA3B0068DD3F /* SingleArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleArticleViewController.m; sourceTree = "<group>"; };
-		90434D871AE2E1420068DD3F /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
-		90434D881AE2E1420068DD3F /* CJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer.m; sourceTree = "<group>"; };
-		90434D891AE2E1420068DD3F /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
-		90434D8A1AE2E1420068DD3F /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
-		90434D8B1AE2E1420068DD3F /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
-		90434D8C1AE2E1420068DD3F /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
-		90434D8D1AE2E1420068DD3F /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
+		90434D911AE445710068DD3F /* EventObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventObject.h; sourceTree = "<group>"; };
+		90434D921AE445710068DD3F /* EventObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventObject.m; sourceTree = "<group>"; };
 		907FC5ED1AE05B4B00AE12E0 /* IsPlayingSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IsPlayingSingle.h; sourceTree = "<group>"; };
 		907FC5EE1AE05B4B00AE12E0 /* IsPlayingSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IsPlayingSingle.m; sourceTree = "<group>"; };
 		90A231D21ADDC192006E7F83 /* AggieRadio2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AggieRadio2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,22 +122,10 @@
 			children = (
 				90A232041ADEF433006E7F83 /* EventsViewController.h */,
 				90A232051ADEF433006E7F83 /* EventsViewController.m */,
+				90434D911AE445710068DD3F /* EventObject.h */,
+				90434D921AE445710068DD3F /* EventObject.m */,
 			);
 			name = Events;
-			sourceTree = "<group>";
-		};
-		90434D861AE2E1210068DD3F /* TouchJSON */ = {
-			isa = PBXGroup;
-			children = (
-				90434D871AE2E1420068DD3F /* CJSONDeserializer.h */,
-				90434D881AE2E1420068DD3F /* CJSONDeserializer.m */,
-				90434D891AE2E1420068DD3F /* CJSONSerializer.h */,
-				90434D8A1AE2E1420068DD3F /* CJSONSerializer.m */,
-				90434D8B1AE2E1420068DD3F /* JSONRepresentation.h */,
-				90434D8C1AE2E1420068DD3F /* NSDictionary_JSONExtensions.h */,
-				90434D8D1AE2E1420068DD3F /* NSDictionary_JSONExtensions.m */,
-			);
-			name = TouchJSON;
 			sourceTree = "<group>";
 		};
 		90A231C91ADDC192006E7F83 = {
@@ -178,7 +159,6 @@
 				90A231E41ADDC192006E7F83 /* LaunchScreen.xib */,
 				90F640901AE168280023CE6E /* Tabs */,
 				90A231D51ADDC192006E7F83 /* Supporting Files */,
-				90434D861AE2E1210068DD3F /* TouchJSON */,
 				90F640781AE152C00023CE6E /* MWFeedParser */,
 			);
 			path = AggieRadio2;
@@ -363,13 +343,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90434D8E1AE2E1420068DD3F /* CJSONDeserializer.m in Sources */,
 				90A232031ADEF3D5006E7F83 /* ArticleViewController.m in Sources */,
 				90A232061ADEF433006E7F83 /* EventsViewController.m in Sources */,
 				90F640821AE152DE0023CE6E /* MWFeedItem.m in Sources */,
+				90434D931AE445710068DD3F /* EventObject.m in Sources */,
 				90F640811AE152DE0023CE6E /* MWFeedInfo.m in Sources */,
 				90F640941AE168880023CE6E /* SinglePodcastViewController.m in Sources */,
-				90434D901AE2E1420068DD3F /* NSDictionary_JSONExtensions.m in Sources */,
 				90A231DE1ADDC192006E7F83 /* ViewController.m in Sources */,
 				90A231DB1ADDC192006E7F83 /* AppDelegate.m in Sources */,
 				90A231D81ADDC192006E7F83 /* main.m in Sources */,
@@ -379,7 +358,6 @@
 				90F6408A1AE159770023CE6E /* NSString+HTML.m in Sources */,
 				907FC5EF1AE05B4B00AE12E0 /* IsPlayingSingle.m in Sources */,
 				90434D851AE2CA3B0068DD3F /* SingleArticleViewController.m in Sources */,
-				90434D8F1AE2E1420068DD3F /* CJSONSerializer.m in Sources */,
 				90F6408B1AE159770023CE6E /* NSString+XMLEntities.m in Sources */,
 				90F6408D1AE159BE0023CE6E /* GTMNSString+HTML.m in Sources */,
 			);

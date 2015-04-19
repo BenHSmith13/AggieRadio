@@ -100,10 +100,20 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    //NSArray *item = [self.json object]  THIS IS WHERE I AM AT
+    //configure the cell
+    //
     
     
     return cell;
+}
+
+-(void)parseJSON:(NSDictionary*)json{
+    NSArray *events = [json objectForKey:@"events"];
+    
+    NSMutableArray *eventData = [NSMutableArray new];
+    for (NSDictionary *individualEvent in events) {
+        //make an object
+    }
 }
 
 - (void)didReceiveMemoryWarning {
