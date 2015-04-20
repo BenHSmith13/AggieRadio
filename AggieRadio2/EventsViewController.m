@@ -29,7 +29,7 @@
         UIImage *iconCalendar = [UIImage imageNamed:@"day7.png"];
         self.tabBarItem.image = iconCalendar;
         
-        self.title = @"Aggie Radio";
+        self.title = @"Events";
         
         //Header ------------------------------------------------------------------------------------
         UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 75, 200, 50)];
@@ -46,7 +46,7 @@
         
         //Table -----------------------------------------------------------------------------------------
         UIImageView *tableHeaderImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 50)];
-        UIImage *tableHeaderImg = [UIImage imageNamed:@"events"];
+        UIImage *tableHeaderImg = [UIImage imageNamed:@"events2"];
         tableHeaderImgView.image = tableHeaderImg;
         tableHeaderImgView.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:tableHeaderImgView];
@@ -102,7 +102,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
     //configure the cell
@@ -135,6 +135,7 @@
         [self.eventTableView reloadData];
     });
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

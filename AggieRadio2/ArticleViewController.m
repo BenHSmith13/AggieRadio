@@ -47,7 +47,7 @@
         
         //Table -----------------------------------------------------------------------------------------
         UIImageView *tableHeaderImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 50)];
-        UIImage *tableHeaderImg = [UIImage imageNamed:@"articles"];
+        UIImage *tableHeaderImg = [UIImage imageNamed:@"articles2"];
         tableHeaderImgView.image = tableHeaderImg;
         tableHeaderImgView.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:tableHeaderImgView];
@@ -56,7 +56,6 @@
         self.articleTableView.delegate = self;
         self.articleTableView.dataSource = self;
         [self.view addSubview:self.articleTableView];
-        
         
         self.view.backgroundColor = [UIColor whiteColor];
     }

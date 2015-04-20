@@ -5,6 +5,8 @@
 //  Created by Ben Smith on 4/17/15.
 //  Copyright (c) 2015 Ben Smith. All rights reserved.
 //
+// thanks to contributors to http://stackoverflow.com/questions/2654849/uislider-to-control-avaudioplayer
+//
 
 #import "SinglePodcastViewController.h"
 
@@ -12,6 +14,7 @@
 
 @property (nonatomic, assign)BOOL isPodcastPlaying;
 @property (nonatomic, strong)UIButton* playButton;
+@property (nonatomic, strong)UISlider* slider;
 
 @end
 
@@ -36,10 +39,29 @@
     self.title = self.item.title;
     self.cast = [AVPlayer playerWithURL:[NSURL URLWithString:[[self.item.enclosures objectAtIndex:0] objectForKey:@"url"]]];
     
-    self.playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 100, 200, 100)];
+    UILabel *articleTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 75, self.view.bounds.size.width, 50)];
+    articleTitle.textAlignment = NSTextAlignmentCenter;
+    articleTitle.text = self.item.title;
+    articleTitle.numberOfLines = 0;
+    articleTitle.lineBreakMode = NSLineBreakByWordWrapping;
+    [articleTitle setFont:[UIFont boldSystemFontOfSize:17]];
+    [self.view addSubview:articleTitle];
+    
+    
+    self.playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 115, 200, 100)];
     [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
     [self.playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
+    [self.playButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.view addSubview:self.playButton];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(16, 200, self.view.bounds.size.width - 32, self.view.bounds.size.height -216)];
+    UIImage *roundLogo = [UIImage imageNamed:@"AggieEmblem"];
+    imageView.image = roundLogo;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:imageView];
+    
+//    self.slider = [[UISlider alloc] initWithFrame:CGRectMake(16, 200, self.view.bounds.size.width - 32, 50)];
+//    [self.view addSubview:self.slider];
     
 }
 
@@ -57,6 +79,27 @@
         self.isPodcastPlaying = NO;
     }
 }
+
+//- (IBAction)slide {  //Trying to Add slider, May skip for now
+//    self.cast.currentTime = self.slider.value;
+//}
+//
+//- (void)updateTime:(NSTimer *)timer {
+//    self.slider.value = self.cast.currentTime;
+//}
+//
+//- (IBAction)play:(id)sender {
+//    //NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"sound.caf" ofType:nil]];
+//    NSError *error;
+//    //self.cast = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+//    if (!self.cast) NSLog(@"Error: %@", error);
+//    //[self.cast prepareToPlay];
+//    self.slider.maximumValue = [self.cast duration];
+//    self.slider.value = 0.0;
+//    
+//    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
+//    [self.cast play];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

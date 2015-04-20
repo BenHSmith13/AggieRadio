@@ -35,12 +35,14 @@
     articleTitle.text = self.item.title;
     articleTitle.numberOfLines = 0;
     articleTitle.lineBreakMode = NSLineBreakByWordWrapping;
-    [articleTitle setFont:[UIFont fontWithName:@"Helvetica-Bold" size:17]]; //Eventually this shoud be changed to get the system font  http://stackoverflow.com/questions/18862868/setting-bold-font-on-ios-uilabel
+    [articleTitle setFont:[UIFont boldSystemFontOfSize:17]];
+    [articleTitle setTextColor:[UIColor whiteColor]];
     [self.view addSubview:articleTitle];
     
     UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 115, self.view.bounds.size.width, 50)];
     authorLabel.textAlignment = NSTextAlignmentCenter;
     authorLabel.text = self.item.author;
+    [authorLabel setTextColor:[UIColor whiteColor]];
     [self.view addSubview:authorLabel];
     
     UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 165, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
@@ -51,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.view setBackgroundColor:[UIColor redColor]];
+    [self.view setBackgroundColor:[UIColor blueColor]];
 }
 
 - (void)didReceiveMemoryWarning {

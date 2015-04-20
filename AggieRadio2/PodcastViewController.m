@@ -55,7 +55,7 @@
         
         //Table -----------------------------------------------------------------------------------------
         UIImageView *tableHeaderImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 50)];
-        UIImage *tableHeaderImg = [UIImage imageNamed:@"podcasts"];
+        UIImage *tableHeaderImg = [UIImage imageNamed:@"podcasts2"];
         tableHeaderImgView.image = tableHeaderImg;
         tableHeaderImgView.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:tableHeaderImgView];
