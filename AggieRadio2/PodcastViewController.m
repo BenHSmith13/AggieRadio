@@ -29,16 +29,14 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        //self.navigationController.navigationBarHidden = YES;
         
         //Stuff for tab -----------------------------------------------------------------------------
         self.tabBarItem.title = @"Podcasts";
         UIImage *iconHeadPhone = [UIImage imageNamed:@"microphone110.png"];
         self.tabBarItem.image = iconHeadPhone;
         
-//        self.title = @"Back";  //This makes the title dissapear off the fatty bar at the top, but not the bar itself.
-//        self.navigationItem.titleView = [[UIView alloc] init];
-//        //[self.navigationController setNavigationBarHidden:YES];  This doen't do crap
+        self.navigationController.navigationBarHidden = YES;                    //Neither of these do crap!
+        [[self navigationController] setNavigationBarHidden:YES animated:YES];
         
         //Header ------------------------------------------------------------------------------------
         UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 75, 200, 50)];
@@ -76,6 +74,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
     // Setup for MWFeed Parser ---------------------------------------------------------------------
      //self.PodcastTableLabel.text= @"Loading...";
     formatter = [[NSDateFormatter alloc] init];
@@ -92,6 +91,13 @@
     feedParser.connectionType = ConnectionTypeAsynchronously;
     [feedParser parse];
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    self.tabBarItem.title = @"Podcasts";
 }
 
 -(void)play:(UIButton*)sender{
@@ -128,7 +134,6 @@
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info {
     NSLog(@"Parsed Feed Info: “%@”", info.title);
-    self.title = info.title;
 }
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
@@ -144,7 +149,6 @@
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
     NSLog(@"Finished Parsing With Error: %@", error);
     if (parsedItems.count == 0) {
-        self.title = @"Failed"; // Show failed message in title
     } else {
         // Failed but some items parsed, so show and inform of error
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Parsing Incomplete"

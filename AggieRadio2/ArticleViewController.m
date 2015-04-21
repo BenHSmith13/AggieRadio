@@ -116,7 +116,7 @@
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info {
     NSLog(@"Parsed Feed Info: “%@”", info.title);
-    self.title = info.title;
+    //self.title = info.title;
 }
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
@@ -132,7 +132,7 @@
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
     NSLog(@"Finished Parsing With Error: %@", error);
     if (parsedItems.count == 0) {
-        self.title = @"Failed"; // Show failed message in title
+        //self.title = @"Failed"; // Show failed message in title
     } else {
         // Failed but some items parsed, so show and inform of error
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Parsing Incomplete"
