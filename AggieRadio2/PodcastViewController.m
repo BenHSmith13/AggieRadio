@@ -35,30 +35,27 @@
         UIImage *iconHeadPhone = [UIImage imageNamed:@"microphone110.png"];
         self.tabBarItem.image = iconHeadPhone;
         
-        self.navigationController.navigationBarHidden = YES;                    //Neither of these do crap!
-        [[self navigationController] setNavigationBarHidden:YES animated:YES];
-        
         //Header ------------------------------------------------------------------------------------
-        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 75, 200, 50)];
+        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 30, 200, 50)];
         UIImage *radioLogo = [UIImage imageNamed:@"WebBanner"];
         logoView.image = radioLogo;
         logoView.contentMode = UIViewContentModeScaleAspectFill;
         [self.view addSubview:logoView];
         
-        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-50, 115, 100, 100)];
+        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-50, 80, 100, 100)];
         [playButton setTitle:@"Listen Live" forState:UIControlStateNormal];
         [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
         [playButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self.view addSubview:playButton];
         
         //Table -----------------------------------------------------------------------------------------
-        UIImageView *tableHeaderImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 200, self.view.bounds.size.width, 50)];
+        UIImageView *tableHeaderImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 175, self.view.bounds.size.width, 50)];
         UIImage *tableHeaderImg = [UIImage imageNamed:@"podcasts2"];
         tableHeaderImgView.image = tableHeaderImg;
         tableHeaderImgView.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:tableHeaderImgView];
         
-        self.podcastTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 250, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
+        self.podcastTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 225, self.view.bounds.size.width, self.view.bounds.size.height - 225)];
         self.podcastTableView.delegate = self;
         self.podcastTableView.dataSource = self;
         [self.view addSubview:self.podcastTableView];
@@ -98,6 +95,10 @@
     [super viewDidAppear:animated];
     
     self.tabBarItem.title = @"Podcasts";
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES;
 }
 
 -(void)play:(UIButton*)sender{
