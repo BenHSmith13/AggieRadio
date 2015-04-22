@@ -8,7 +8,7 @@
 
 #import "SingleArticleViewController.h"
 
-@interface SingleArticleViewController ()
+@interface SingleArticleViewController () <UIWebViewDelegate>
 
 @end
 
@@ -46,7 +46,21 @@
     [self.view addSubview:authorLabel];
     
     UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 165, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
+    
+    NSRange range = [self.item.content rangeOfString:self.item.content];
+    
+    if(range.location != NSNotFound) {
+        // Adjust style for mobile
+        float inset = 16;
+        NSString *style = [NSString stringWithFormat:@"<style>img {max-width: %fpx;}</style>", self.view.bounds.size.width - inset];
+        self.item.content = [NSString stringWithFormat:@"%@%@%@", [self.item.content substringToIndex:range.location], style, [self.item.content substringFromIndex:range.location]];
+        NSString *style2 = [NSString stringWithFormat:@"<style>iframe {max-width: %fpx;}</style>", self.view.bounds.size.width - inset];
+        self.item.content = [NSString stringWithFormat:@"%@%@%@", [self.item.content substringToIndex:range.location], style2, [self.item.content substringFromIndex:range.location]];
+
+    }
+    
     [webView loadHTMLString:self.item.content baseURL:nil];
+    //webView.delegate = self;
     [self.view addSubview:webView];
 }
 
@@ -55,6 +69,8 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor blueColor]];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
