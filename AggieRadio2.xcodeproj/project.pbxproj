@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90254B9F1AE7F355000E3167 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90254B9E1AE7F355000E3167 /* Launch Screen.xib */; };
 		90434D851AE2CA3B0068DD3F /* SingleArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90434D841AE2CA3B0068DD3F /* SingleArticleViewController.m */; };
 		90434D931AE445710068DD3F /* EventObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 90434D921AE445710068DD3F /* EventObject.m */; };
 		907FC5EF1AE05B4B00AE12E0 /* IsPlayingSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 907FC5EE1AE05B4B00AE12E0 /* IsPlayingSingle.m */; };
@@ -42,13 +43,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		90254B9E1AE7F355000E3167 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		90434D831AE2CA3B0068DD3F /* SingleArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleArticleViewController.h; sourceTree = "<group>"; };
 		90434D841AE2CA3B0068DD3F /* SingleArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleArticleViewController.m; sourceTree = "<group>"; };
 		90434D911AE445710068DD3F /* EventObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventObject.h; sourceTree = "<group>"; };
 		90434D921AE445710068DD3F /* EventObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventObject.m; sourceTree = "<group>"; };
 		907FC5ED1AE05B4B00AE12E0 /* IsPlayingSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IsPlayingSingle.h; sourceTree = "<group>"; };
 		907FC5EE1AE05B4B00AE12E0 /* IsPlayingSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IsPlayingSingle.m; sourceTree = "<group>"; };
-		90A231D21ADDC192006E7F83 /* AggieRadio2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AggieRadio2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		90A231D21ADDC192006E7F83 /* Aggie Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aggie Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A231D61ADDC192006E7F83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A231D71ADDC192006E7F83 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		90A231D91ADDC192006E7F83 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		90A231C91ADDC192006E7F83 = {
 			isa = PBXGroup;
 			children = (
+				90254B9E1AE7F355000E3167 /* Launch Screen.xib */,
 				90A232071ADF09E6006E7F83 /* AVFoundation.framework */,
 				90A231D41ADDC192006E7F83 /* AggieRadio2 */,
 				90A231EE1ADDC192006E7F83 /* AggieRadio2Tests */,
@@ -141,7 +144,7 @@
 		90A231D31ADDC192006E7F83 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				90A231D21ADDC192006E7F83 /* AggieRadio2.app */,
+				90A231D21ADDC192006E7F83 /* Aggie Radio.app */,
 				90A231EB1ADDC192006E7F83 /* AggieRadio2Tests.xctest */,
 			);
 			name = Products;
@@ -260,7 +263,7 @@
 			);
 			name = AggieRadio2;
 			productName = AggieRadio2;
-			productReference = 90A231D21ADDC192006E7F83 /* AggieRadio2.app */;
+			productReference = 90A231D21ADDC192006E7F83 /* Aggie Radio.app */;
 			productType = "com.apple.product-type.application";
 		};
 		90A231EA1ADDC192006E7F83 /* AggieRadio2Tests */ = {
@@ -324,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A231E11ADDC192006E7F83 /* Main.storyboard in Resources */,
+				90254B9F1AE7F355000E3167 /* Launch Screen.xib in Resources */,
 				90A231E61ADDC192006E7F83 /* LaunchScreen.xib in Resources */,
 				90A231E31ADDC192006E7F83 /* Images.xcassets in Resources */,
 			);
@@ -489,7 +493,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AggieRadio2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Aggie Radio";
 			};
 			name = Debug;
 		};
@@ -499,7 +503,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AggieRadio2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Aggie Radio";
 			};
 			name = Release;
 		};
