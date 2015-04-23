@@ -10,11 +10,13 @@
 
 #import "SinglePodcastViewController.h"
 
-@interface SinglePodcastViewController ()
+@interface SinglePodcastViewController () <AVAudioPlayerDelegate>
 
-@property (nonatomic, assign)BOOL isPodcastPlaying;
-@property (nonatomic, strong)UIButton* playButton;
-@property (nonatomic, strong)UISlider* slider;
+@property (nonatomic, strong) AVAudioPlayer* cast;
+@property (nonatomic, assign) BOOL isPodcastPlaying;
+@property (nonatomic, strong) UIButton* playButton;
+@property (nonatomic, strong) UISlider* slider;
+@property (nonatomic, strong) NSTimer* sliderTimer;
 
 @end
 
@@ -27,6 +29,7 @@
     self = [super init];
     if (self)
     {
+        
     }
     return self;
 }
@@ -38,6 +41,7 @@
     
     self.title = self.item.title;
     self.cast = [AVPlayer playerWithURL:[NSURL URLWithString:[[self.item.enclosures objectAtIndex:0] objectForKey:@"url"]]];
+    //self.cast = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:[[self.item.enclosures objectAtIndex:0] objectForKey:@"url"]] error:nil];
     
     UILabel *articleTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 75, self.view.bounds.size.width, 50)];
     articleTitle.textAlignment = NSTextAlignmentCenter;
@@ -50,7 +54,7 @@
     
     self.playButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-100, 115, 200, 100)];
     [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
-    [self.playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
+    [self.playButton addTarget:self action:@selector(playButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.playButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.view addSubview:self.playButton];
     
@@ -60,8 +64,8 @@
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:imageView];
     
-//    self.slider = [[UISlider alloc] initWithFrame:CGRectMake(16, 200, self.view.bounds.size.width - 32, 50)];
-//    [self.view addSubview:self.slider];
+    self.slider = [[UISlider alloc] initWithFrame:CGRectMake(16, 200, self.view.bounds.size.width - 32, 50)];
+    [self.view addSubview:self.slider];
     
 }
 
@@ -80,26 +84,46 @@
     }
 }
 
-//- (IBAction)slide {  //Trying to Add slider, May skip for now
-//    self.cast.currentTime = self.slider.value;
-//}
-//
-//- (void)updateTime:(NSTimer *)timer {
-//    self.slider.value = self.cast.currentTime;
-//}
-//
-//- (IBAction)play:(id)sender {
-//    //NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"sound.caf" ofType:nil]];
-//    NSError *error;
-//    //self.cast = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-//    if (!self.cast) NSLog(@"Error: %@", error);
-//    //[self.cast prepareToPlay];
-//    self.slider.maximumValue = [self.cast duration];
-//    self.slider.value = 0.0;
-//    
-//    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
-//    [self.cast play];
-//}
+- (IBAction)playButtonClicked:(id)sender {
+    // Read the file from resource folder and set it in the avAudioPlayer
+    //NSURL *fileUrl = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"musicFile" ofType:@"caf"]];
+    //avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileUrl error:nil];
+    [self.cast setDelegate:self];
+    [self.cast setVolume:1.0];
+    
+    // Set a timer which keep getting the current music time and update the UISlider in 1 sec interval
+    self.sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateSlider) userInfo:nil repeats:YES];
+    // Set the maximum value of the UISlider
+    self.slider.maximumValue = self.cast.duration;
+    // Set the valueChanged target
+    [self.slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    // Play the audio
+    [self.cast prepareToPlay];
+    [self.cast play];
+}
+
+- (void)updateSlider {
+    // Update the slider about the music time
+    self.slider.value = self.cast.currentTime;
+}
+
+- (IBAction)sliderChanged:(UISlider *)sender {
+    // Fast skip the music when user scroll the UISlider
+    [self.cast stop];
+    [self.cast setCurrentTime:self.slider.value];
+    [self.cast prepareToPlay];
+    [self.cast play];
+}
+
+// Stop the timer when the music is finished (Need to implement the AVAudioPlayerDelegate in the Controller header)
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    // Music completed
+    if (flag) {
+        [self.sliderTimer invalidate];
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

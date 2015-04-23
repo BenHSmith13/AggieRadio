@@ -46,7 +46,7 @@
         
         //Table -----------------------------------------------------------------------------------------
         UIImageView *tableHeaderImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 175, self.view.bounds.size.width, 50)];
-        UIImage *tableHeaderImg = [UIImage imageNamed:@"events2"];
+        UIImage *tableHeaderImg = [UIImage imageNamed:@"Events5"];
         tableHeaderImgView.image = tableHeaderImg;
         tableHeaderImgView.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:tableHeaderImgView];
@@ -67,7 +67,7 @@
                                                 }];
         [dataTask resume];
         
-        self.view.backgroundColor = [UIColor whiteColor];
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"metal3.png"]];
     }
     return self;
 }

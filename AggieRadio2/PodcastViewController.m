@@ -50,7 +50,7 @@
         
         //Table -----------------------------------------------------------------------------------------
         UIImageView *tableHeaderImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 175, self.view.bounds.size.width, 50)];
-        UIImage *tableHeaderImg = [UIImage imageNamed:@"podcasts2"];
+        UIImage *tableHeaderImg = [UIImage imageNamed:@"Podcasts5"];
         tableHeaderImgView.image = tableHeaderImg;
         tableHeaderImgView.contentMode = UIViewContentModeScaleAspectFit;
         [self.view addSubview:tableHeaderImgView];
@@ -62,7 +62,7 @@
         
 
         
-        self.view.backgroundColor = [UIColor whiteColor];
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"metal3.png"]];
     }
     return self;
 }
@@ -191,14 +191,14 @@
         
         // Process
         NSString *itemTitle = item.title ? [item.title stringByConvertingHTMLToPlainText] : @"[No Title]";
-        NSString *itemSummary = item.summary ? [item.summary stringByConvertingHTMLToPlainText] : @"";
+        //NSString *itemSummary = item.summary ? [item.summary stringByConvertingHTMLToPlainText] : @"";
         
         // Set
         cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
         cell.textLabel.text = itemTitle;
         NSMutableString *subtitle = [NSMutableString string];
-        if (item.date) [subtitle appendFormat:@"%@: ", [formatter stringFromDate:item.date]];
-        [subtitle appendString:itemSummary];
+        if (item.date) [subtitle appendFormat:@"%@ ", [formatter stringFromDate:item.date]];
+        //[subtitle appendString:itemSummary];
         cell.detailTextLabel.text = subtitle;
         
     }

@@ -17,6 +17,5 @@
 
 -(instancetype) initWithNothing;
 @property (nonatomic, strong) MWFeedItem *item;
-@property (nonatomic, strong) AVAudioPlayer* cast;
 
 @end
