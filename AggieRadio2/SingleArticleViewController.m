@@ -36,13 +36,13 @@
     articleTitle.numberOfLines = 0;
     articleTitle.lineBreakMode = NSLineBreakByWordWrapping;
     [articleTitle setFont:[UIFont boldSystemFontOfSize:17]];
-    [articleTitle setTextColor:[UIColor whiteColor]];
+    [articleTitle setTextColor:[UIColor colorWithRed:18.0/255.0 green:6.0/255.0 blue:80.0/255.0 alpha:1]];
     [self.view addSubview:articleTitle];
     
     UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 115, self.view.bounds.size.width, 50)];
     authorLabel.textAlignment = NSTextAlignmentCenter;
     authorLabel.text = self.item.author;
-    [authorLabel setTextColor:[UIColor whiteColor]];
+    [authorLabel setTextColor:[UIColor colorWithRed:18.0/255.0 green:6.0/255.0 blue:80.0/255.0 alpha:1]];
     [self.view addSubview:authorLabel];
     
     UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 165, self.view.bounds.size.width, self.view.bounds.size.height - 200)];
@@ -67,7 +67,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.view setBackgroundColor:[UIColor blueColor]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"metal3.png"]];
+
 }
 
 
