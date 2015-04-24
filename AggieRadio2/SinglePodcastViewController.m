@@ -59,8 +59,6 @@
     [self.view addSubview:self.playButton];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"stampedSurface"]];
-
-    
 }
 
 -(void)play:(UIButton*)sender
